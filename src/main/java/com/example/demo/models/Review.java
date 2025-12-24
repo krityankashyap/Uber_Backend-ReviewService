@@ -2,33 +2,39 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "bookingReview")
+@Table(name = "booking_review")
+@EntityListeners(AuditingEntityListener.class)
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String content;
+    private String content;
 
-    Double ratings;
+    private Double ratings;
 
-    @Column(nullable = false)
-    @Timestamp
-    @CreatedDate // this annotations tells spring to handle object creation only
-    Date createdAt;
+    @CreatedDate
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDate createdAt;
 
-    @Column(nullable = false)
-    @Timestamp
-    @LastModifiedDate  // this annotations tells spring to handle object update
-    Date updatedAt;
-
-
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private LocalDate updatedAt;
 }
