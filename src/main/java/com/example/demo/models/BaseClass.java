@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public abstract class BaseClass {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @CreatedDate
