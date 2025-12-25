@@ -13,17 +13,17 @@ import java.time.LocalDate;
 @MappedSuperclass
 @Getter
 @Setter
-public class BaseClass {
+public abstract class BaseClass {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    protected Long id;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false, nullable = false)
-    private LocalDate createdAt;
+    protected LocalDate createdAt;
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDate updatedAt;
+    protected LocalDate updatedAt;
 }
