@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
@@ -22,6 +23,6 @@ public class Driver extends BaseClass {
     private String license;
 
     // Driver has many bookings and each booking belongs to a driver(1:n)
-    @OneToMany(mappedBy = "driver")
+    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Booking> bookings= new ArrayList<>();
 }
