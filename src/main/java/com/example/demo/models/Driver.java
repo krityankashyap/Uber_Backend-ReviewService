@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,5 +26,6 @@ public class Driver extends BaseClass {
 
     // Driver has many bookings and each booking belongs to a driver(1:n)
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)   // out of the box solution for N+1 query springJPA provides
     private List<Booking> bookings= new ArrayList<>();
 }

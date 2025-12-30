@@ -6,18 +6,18 @@ import com.example.demo.Repositories.ReviewRepository;
 import com.example.demo.models.Booking;
 import com.example.demo.models.Driver;
 import com.example.demo.models.Review;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @EnableJpaAuditing
+
 public class ReviewService implements CommandLineRunner {
 
     ReviewRepository reviewRepo;
@@ -31,6 +31,7 @@ public class ReviewService implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         System.out.println("***************");
 //        Review r= Review.builder().content("Amazing ride exp")
@@ -77,9 +78,19 @@ public class ReviewService implements CommandLineRunner {
 //               System.out.println(booking.getBooking status());
 //           }
 //        }
-        Optional<Driver> driver= driverRepo.hqlFindByIdAndLicense(2L, "DL232323");
-        System.out.println(driver.get().getName());
+//        Optional<Driver> driver= driverRepo.findByIdAndLicense(2L, "DL232323");
+//        System.out.println(driver.get().getName());
+//
 
+        List<Long> driverIds= new ArrayList<>(Arrays.asList(1L , 2L));
 
+        List<Driver> drivers= driverRepo.findAllByIdIn(driverIds);
+
+    //    List<Booking> bookings= bookingRepo.findAllByDriverIn(drivers);  custom implementation for N+1 query
+
+        for(Driver driver: drivers){
+            List<Booking> bookings= driver.getBookings();
+            bookings.forEach(booking -> System.out.println(booking.getId()));
+        }
     }
 }
