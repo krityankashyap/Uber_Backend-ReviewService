@@ -21,11 +21,11 @@ public class Driver extends BaseClass {
 
     private String name;
 
-    @Column(nullable = false , unique = true)
+    // Change this line to map the Java field 'license' to the SQL column 'license_number'
+    @Column(name = "license_number", nullable = false, unique = true)
     private String license;
 
-    // Driver has many bookings and each booking belongs to a driver(1:n)
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
-    @Fetch(FetchMode.SUBSELECT)   // out of the box solution for N+1 query springJPA provides
-    private List<Booking> bookings= new ArrayList<>();
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Booking> bookings = new ArrayList<>();
 }

@@ -1,10 +1,11 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,22 +15,21 @@ import java.util.Date;
 @AllArgsConstructor
 public class Booking extends BaseClass{
 
-    @OneToOne(cascade = {CascadeType.PERSIST , CascadeType.REMOVE})
-    private Review driverReview; // We have defined 1:1 relationship between review and booking
-
     @Enumerated(value = EnumType.STRING)
-    private BookingStatus bookingstatus;
+    private BookingStatus bookingStatus;
 
-    @Timestamp
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date startTime;
 
-    private Date Endtime;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date endTime;
 
-    private long totalDistance;
+    private Long totalDistance;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Driver driver;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Passenger passenger;
+
 }
