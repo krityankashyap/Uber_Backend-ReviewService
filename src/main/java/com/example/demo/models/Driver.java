@@ -21,6 +21,9 @@ public class Driver extends BaseClass {
 
     private String name;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     // Change this line to map the Java field 'license' to the SQL column 'license_number'
     @Column(name = "license_number", nullable = false, unique = true)
     private String license;
