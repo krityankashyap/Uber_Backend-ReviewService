@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,6 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Booking extends BaseClass{
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Review review;
 
     @Enumerated(value = EnumType.STRING)
     private BookingStatus bookingStatus;
