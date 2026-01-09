@@ -11,5 +11,9 @@ public interface ReviewService {
 
     public boolean deleteReviewById(Long id);
 
-    List<Review> findAllReview();
+    public List<Review> findAllReview();
+
+    public Review publishReview(Review review);
+
+    public Review updateReview(Long id, Review review);
 }
