@@ -19,7 +19,8 @@ public class Review extends BaseClass {
     @Column(nullable = false)
     private String content;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)  // this annotations helps to modify the properties of the foreign key column that is present in another table
     private Booking booking;
 
     @Column(name = "rating")
