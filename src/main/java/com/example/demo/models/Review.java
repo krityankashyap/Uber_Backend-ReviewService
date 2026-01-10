@@ -19,6 +19,10 @@ public class Review extends BaseClass {
     @Column(nullable = false)
     private String content;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Booking booking;
+
+    @Column(name = "rating")
     private Double ratings;
 
 

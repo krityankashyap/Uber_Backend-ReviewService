@@ -14,8 +14,14 @@ import java.util.Optional;
 public class ReviewController {
     private ReviewService reviewService;
 
-    public void RestController(ReviewService reviewService){
-        this.reviewService= reviewService;
+    public ReviewController(ReviewService reviewService){
+        this.reviewService = reviewService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Review> publishReview(@RequestBody Review request) {
+        Review review = this.reviewService.publishReview(request);
+        return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -25,7 +31,7 @@ public class ReviewController {
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    @GetMapping("{/reviewId}")
+    @GetMapping("/{reviewId}")
     public ResponseEntity<?> getReviewById(@PathVariable Long id) {
         try {
             Optional<Review> review = this.reviewService.findReviewById(id);
@@ -35,7 +41,7 @@ public class ReviewController {
         }
     }
 
-    @DeleteMapping("{/reviewId}")
+    @DeleteMapping("/{reviewId}")
     public ResponseEntity<?> deleteReviewById(@PathVariable Long id){
         try{
             boolean isDeleted= this.reviewService.deleteReviewById(id);

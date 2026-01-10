@@ -14,9 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Booking extends BaseClass{
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Review review;
-
     @Enumerated(value = EnumType.STRING)
     private BookingStatus bookingStatus;
 

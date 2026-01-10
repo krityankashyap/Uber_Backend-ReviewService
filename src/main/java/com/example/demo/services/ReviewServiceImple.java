@@ -4,10 +4,12 @@ import com.example.demo.Repositories.ReviewRepository;
 import com.example.demo.models.Review;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.FetchNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReviewServiceImple implements ReviewService{
 
     private ReviewRepository reviewRepo;
